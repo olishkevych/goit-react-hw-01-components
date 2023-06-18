@@ -17,9 +17,10 @@ export const TransactionHistory = ({ items }) => {
 
       <tbody>
         {items.map(item => { 
+        
           item.amount = Number(item.amount)
         return (
-          <TransactionRecord key={item.id} item={item}  />  
+          <TransactionRecord key={item.id} item={item}   />  
           )
       })}
       </tbody>
