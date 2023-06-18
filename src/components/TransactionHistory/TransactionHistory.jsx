@@ -4,7 +4,7 @@ import {TableHeaders, TransactionTable} from "./TransactionHistory.styled"
 
 
 export const TransactionHistory = ({ items }) => {
-  let index=0;
+ 
   return (
     <TransactionTable>
       <thead>
