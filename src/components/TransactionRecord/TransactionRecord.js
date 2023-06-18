@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import { TransactionLine } from './TransactionRecord.styled';
+import PropTypes from 'prop-types';
 
 export const TransactionRecord = ({ item }) => {
   const capitalizeFirstLetter = string => {
