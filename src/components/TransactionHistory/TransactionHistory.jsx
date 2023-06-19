@@ -1,10 +1,8 @@
 import { TransactionRecord } from 'components/TransactionRecord/TransactionRecord';
 import PropTypes from 'prop-types';
-import {TableHeaders, TransactionTable} from "./TransactionHistory.styled"
-
+import { TableHeaders, TransactionTable } from './TransactionHistory.styled';
 
 export const TransactionHistory = ({ items }) => {
- 
   return (
     <TransactionTable>
       <thead>
@@ -16,13 +14,17 @@ export const TransactionHistory = ({ items }) => {
       </thead>
 
       <tbody>
-        {items.map(item => { 
-        
-          item.amount = Number(item.amount)
-        return (
-          <TransactionRecord key={item.id} item={item}   />  
-          )
-      })}
+        {items.map(item => {
+          item.amount = Number(item.amount);
+          return (
+            <TransactionRecord
+              key={item.id}
+              currency={item.currency}
+              type={item.type}
+              amount={item.amount}
+            />
+          );
+        })}
       </tbody>
     </TransactionTable>
   );
@@ -30,12 +32,12 @@ export const TransactionHistory = ({ items }) => {
 
 TransactionHistory.propTypes = {
   items: PropTypes.arrayOf(
-    PropTypes.shape({
+    PropTypes.exact({
       id: PropTypes.string.isRequired,
       type: PropTypes.oneOf(['payment', 'invoice', 'withdrawal', 'deposit'])
         .isRequired,
       amount: PropTypes.string.isRequired,
       currency: PropTypes.string.isRequired,
     })
-  ),
+  ).isRequired,
 };

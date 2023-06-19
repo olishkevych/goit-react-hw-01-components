@@ -6,3 +6,7 @@ export const TransactionLine = styled.tr`
     background-color: #e7eaf6;
   }
 `;
+
+export const TypeValue = styled.td`
+  text-transform: capitalize;
+`;
