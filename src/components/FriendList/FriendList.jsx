@@ -3,7 +3,7 @@ import { FriendsList } from './FriendList.styled';
 import { Section, Header } from '../CommonCSSComp/CommonCSSComp';
 import PropTypes from 'prop-types';
 
-export let FriendList = ({ friends }) => {
+export const FriendList = ({ friends }) => {
   return (
     <Section>
       <Header>Friends</Header>
