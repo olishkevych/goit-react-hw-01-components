@@ -1,63 +1,38 @@
-import { Component } from 'react';
-import { Statistics } from 'components/Statistics/Statistics';
-import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
-import { Section } from './Section/Section';
-import { Notification } from 'components/Notification/Notification';
-import styles from './App.module.css';
+import { Profile } from './Profile/Profile.js';
+import { Statistics } from './Statistics/Statistics.js';
+import { FriendList } from './FriendList/FriendList.jsx';
+import { TransactionHistory } from './TransactionHistory/TransactionHistory.jsx';
 
-export class App extends Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  };
+import user from './../data/user.json';
+import stats from './../data/stats-data.json';
+import friends from './../data/friends';
+import transactions from './../data/transactions';
 
-  countTotalFeedback() {
-    const { good, neutral, bad } = this.state;
-    return good + neutral + bad;
-  }
-
-  handleClick = ({ target }) => {
-    this.setState(prevState => ({
-      [target.value]: prevState[target.value] + 1,
-    }));
-  };
-
-  countPositiveFeedbackPercentage() {
-    const percentage = (this.state.good / this.countTotalFeedback()) * 100;
-    return percentage > 0 ? percentage.toFixed(0) : 0;
-  }
-
-  render() {
-    const { good, neutral, bad } = this.state;
-    const totalFeedback = this.countTotalFeedback();
-    const positiveFeedbackPercentage = Number(
-      this.countPositiveFeedbackPercentage()
-    );
-
-    return (
-      <div className={styles.wrapper}>
-        <Section title="Please leave feedback">
-          <FeedbackOptions
-            options={Object.keys(this.state)}
-            onLeaveFeedback={this.handleClick}
-          />
-        </Section>
-
-        <Section title="Statistics">
-          {totalFeedback > 0 ? (
-            <Statistics
-              good={good}
-              neutral={neutral}
-              bad={bad}
-              total={totalFeedback}
-              positivePercentage={positiveFeedbackPercentage}
-            />
-          ) : (
-            <Notification message="There is no feedback" />
-          )}
-        </Section>
+export const App = () => {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        fontSize: 40,
+        color: '#010101',
+        flexWrap: 'wrap',
+      }}
+    >
+      <div>
+        {' '}
+        <Profile
+          username={user.username}
+          tag={user.tag}
+          location={user.location}
+          avatar={user.avatar}
+          stats={user.stats}
+        />
+        <Statistics stats={stats} title="Upload files" />
+        <FriendList friends={friends} />
       </div>
-    );
-  }
-}
+
+      <TransactionHistory items={transactions} />
+    </div>
+  );
+};
